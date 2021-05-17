@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:talantix_app/data/api/api_util.dart';
 import 'package:talantix_app/data/api/service/talantix_service.dart';
 
@@ -6,7 +7,8 @@ class ApiModule {
 
   static ApiUtil apiUtil() {
     if (_apiUtil == null) {
-      _apiUtil = ApiUtil(TalantixService());
+      final dio = Dio();
+      _apiUtil = ApiUtil(TalantixService(dio));
     }
     return _apiUtil;
   }

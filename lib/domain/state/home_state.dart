@@ -37,7 +37,10 @@ abstract class HomeStateBase with Store {
   @action
   Future<String> getBtcUsdtLastPrice() async {
     await getQuotes();
-    Quote btcUsdt = quotes.firstWhere((quote) => quote.symbol == "BTCUSDT");
-    return btcUsdt.lastPrice;
+    if (quotes.isNotEmpty) {
+      Quote btcUsdt = quotes.firstWhere((quote) => quote.symbol == "BTCUSDT");
+      return btcUsdt.lastPrice;
+    }
+    return null;
   }
 }

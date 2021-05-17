@@ -1,29 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:retrofit/retrofit.dart';
 import 'package:talantix_app/data/api/model/api_quote.dart';
 
-List<ApiQuote> parseQuotes(dynamic responseBody) {
-  // final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  return responseBody.map<ApiQuote>((json) => ApiQuote.fromApi(json)).toList();
-}
+part 'talantix_service.g.dart';
 
-class TalantixService {
-  static const _BASE_URL = 'https://api.binance.com/api/v3/ticker/';
+@RestApi(baseUrl: 'https://api.binance.com/api/v3/ticker/')
+abstract class TalantixService {
+  factory TalantixService(Dio dio, {String baseUrl}) = _TalantixService;
 
-  final Dio _dio = Dio(
-    BaseOptions(baseUrl: _BASE_URL),
-  );
-
-  Future<List<ApiQuote>> getQuotes() async {
-    final response = await _dio.get('24hr');
-    switch (response.statusCode) {
-      case 200:
-        print(response.data);
-        return compute(parseQuotes, response.data);
-        break;
-      default:
-        throw response.data;
-        break;
-    }
-  }
+  @GET('/24hr')
+  Future<List<ApiQuote>> getQuotes();
 }

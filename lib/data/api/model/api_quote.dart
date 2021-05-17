@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'api_quote.g.dart';
+
+@JsonSerializable()
 class ApiQuote {
   String symbol;
   String priceChange;
@@ -44,27 +49,8 @@ class ApiQuote {
       this.lastId,
       this.count});
 
-  ApiQuote.fromApi(Map<String, dynamic> json) {
-    symbol = json['symbol'];
-    priceChange = json['priceChange'];
-    priceChangePercent = json['priceChangePercent'];
-    weightedAvgPrice = json['weightedAvgPrice'];
-    prevClosePrice = json['prevClosePrice'];
-    lastPrice = json['lastPrice'];
-    lastQty = json['lastQty'];
-    bidPrice = json['bidPrice'];
-    bidQty = json['bidQty'];
-    askPrice = json['askPrice'];
-    askQty = json['askQty'];
-    openPrice = json['openPrice'];
-    highPrice = json['highPrice'];
-    lowPrice = json['lowPrice'];
-    volume = json['volume'];
-    quoteVolume = json['quoteVolume'];
-    openTime = json['openTime'];
-    closeTime = json['closeTime'];
-    firstId = json['firstId'];
-    lastId = json['lastId'];
-    count = json['count'];
-  }
+  factory ApiQuote.fromJson(Map<String, dynamic> json) =>
+      _$ApiQuoteFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ApiQuoteToJson(this);
 }

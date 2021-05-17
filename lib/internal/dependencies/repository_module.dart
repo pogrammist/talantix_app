@@ -3,14 +3,14 @@ import 'package:talantix_app/domain/repository/quotes_repository.dart';
 import 'api_module.dart';
 
 class RepositoryModule {
-  static QuotesRepository _mediaRepository;
+  static QuotesRepository _quoteRepository;
 
-  static QuotesRepository mediaRepository() {
-    if (_mediaRepository == null) {
-      _mediaRepository = QuotesDataRepository(
+  static QuotesRepository quoteRepository() {
+    if (_quoteRepository == null) {
+      _quoteRepository = QuotesDataRepository(
         ApiModule.apiUtil(),
       );
     }
-    return _mediaRepository;
+    return _quoteRepository;
   }
 }
